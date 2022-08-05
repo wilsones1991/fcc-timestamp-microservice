@@ -7,7 +7,7 @@
   "description": "An FCC Backend Challenge",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "compression": "^1.7.4",

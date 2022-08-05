@@ -31,19 +31,24 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date", (req, res) => {
   
-  let date = req.params.date
+  const input = req.params.date
 
-  if (!isNaN(date)) {
-    date *= 1000
+  const getDate = (input) => {
+    if (input.length === 13) {
+      return new Date(+input)
+    }
+    return new Date(input)
   }
 
-  if (new Date(date).toString() === "Invalid Date") {
+  const date = getDate(input)
+  console.log(date)
+
+  if (date.toString() === "Invalid Date") {
     res.json({"error": "Invalid Date"})
-    console.log(date)
-    console.log(new Date(date))
     return
   }
-  res.json({"unix": Math.floor(new Date(date).getTime() / 1000), "utc": new Date(date).toUTCString()})
+
+  res.json({"unix": date.getTime(), "utc": date.toUTCString()})
 })
 
 // listen for requests :)
